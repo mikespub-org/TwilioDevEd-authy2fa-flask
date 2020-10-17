@@ -7,7 +7,7 @@ $(document).ready(function() {
   });
 
   var attemptOneTouchVerification = function(form) {
-    $.post( "/login", form, function(data) {
+    $.post( "/test/login", form, function(data) {
       // Check first if we successfully authenticated the username and password
       if (data.hasOwnProperty('invalid_credentials')) {
         $('.form-errors').remove();
@@ -26,10 +26,10 @@ $(document).ready(function() {
   };
 
   var checkForOneTouch = function() {
-    $.get( "/login/status", function(data) {
+    $.get( "/test/login/status", function(data) {
       
       if (data == 'approved') {
-        window.location.href = "/account";
+        window.location.href = "/test/account";
       } else if (data == 'denied') {
         redirectToTokenForm();
       } else {
@@ -39,6 +39,6 @@ $(document).ready(function() {
   };
 
   var redirectToTokenForm = function() {
-    window.location.href = "/verify";
+    window.location.href = "/test/verify";
   };
 });

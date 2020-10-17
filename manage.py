@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from flask_script import Manager, Shell
 
@@ -27,4 +27,5 @@ def test():
         sys.exit(1)
 
 if __name__ == "__main__":
+    print("Usage:\n./manage.py runserver --host 0.0.0.0 --port 8080\n")
     manager.run()
