@@ -2,22 +2,18 @@ import unittest
 
 from twofa import create_app, db
 from twofa.models import User
+
 try:
     from unittest.mock import patch
 except ImportError:
-    from mock import patch
+    from unittest.mock import patch
 
 
 class UserTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = create_app('testing')
+        self.app = create_app("testing")
         self.user = User(
-            'example@example.com',
-            'fakepassword',
-            'Alice',
-            33,
-            600112233,
-            123
+            "example@example.com", "fakepassword", "Alice", 33, 600112233, 123
         )
         db.create_all()
 
@@ -29,7 +25,7 @@ class UserTestCase(unittest.TestCase):
         # Arrange
 
         # Act
-        with patch('twofa.models.authy_user_has_app', return_value=True):
+        with patch("twofa.models.authy_user_has_app", return_value=True):
             has_authy_app = self.user.has_authy_app
 
         # Assert
@@ -39,7 +35,7 @@ class UserTestCase(unittest.TestCase):
         # Arrange
 
         # Act
-        with patch('twofa.models.authy_user_has_app', return_value=False):
+        with patch("twofa.models.authy_user_has_app", return_value=False):
             has_authy_app = self.user.has_authy_app
 
         # Assert
@@ -55,7 +51,7 @@ class UserTestCase(unittest.TestCase):
     def test_password_setter(self):
         # Arrange
         old_password_hash = self.user.password_hash
-        password = 'superpassword'
+        password = "superpassword"
 
         # Act
         self.user.password = password
@@ -66,8 +62,8 @@ class UserTestCase(unittest.TestCase):
 
     def test_verify_password(self):
         # Arrange
-        password = 'anothercoolpassword'
-        unused_password = 'unusedpassword'
+        password = "anothercoolpassword"
+        unused_password = "unusedpassword"
         self.user.password = password
 
         # Act
@@ -82,7 +78,7 @@ class UserTestCase(unittest.TestCase):
         # Arrange
 
         # Act
-        with patch('twofa.models.send_authy_one_touch_request') as fake_send:
+        with patch("twofa.models.send_authy_one_touch_request") as fake_send:
             self.user.send_one_touch_request()
 
         # Assert

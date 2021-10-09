@@ -8,16 +8,10 @@ class User(db.Model):
     """
     Represents a single user in the system.
     """
-    __tablename__ = 'users'
 
-    AUTHY_STATUSES = (
-        'unverified',
-        'onetouch',
-        'sms',
-        'token',
-        'approved',
-        'denied'
-    )
+    __tablename__ = "users"
+
+    AUTHY_STATUSES = ("unverified", "onetouch", "sms", "token", "approved", "denied")
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
@@ -26,10 +20,18 @@ class User(db.Model):
     country_code = db.Column(db.Integer)
     phone = db.Column(db.String(30))
     authy_id = db.Column(db.Integer)
-    authy_status = db.Column(db.Enum(*AUTHY_STATUSES, name='authy_statuses'))
+    authy_status = db.Column(db.Enum(*AUTHY_STATUSES, name="authy_statuses"))
 
-    def __init__(self, email, password, full_name, country_code,
-                 phone, authy_id, authy_status='approved'):
+    def __init__(
+        self,
+        email,
+        password,
+        full_name,
+        country_code,
+        phone,
+        authy_id,
+        authy_status="approved",
+    ):
         self.email = email
         self.password = password
         self.full_name = full_name
@@ -39,11 +41,11 @@ class User(db.Model):
         self.authy_status = authy_status
 
     def __repr__(self):
-        return '<User %r>' % self.email
+        return "<User %r>" % self.email
 
     @property
     def password(self):
-        raise AttributeError('password is not readable')
+        raise AttributeError("password is not readable")
 
     @property
     def has_authy_app(self):
