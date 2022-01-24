@@ -11,10 +11,10 @@ Flask-WTF==1.0.0
 
 # Other libraries
 authy==2.2.6
-requests>=2.26.0
+requests>=2.27.1
 
 # Production server
 gunicorn==20.1.0
 
 # Testing
-coverage==6.1.2
+coverage==6.2
