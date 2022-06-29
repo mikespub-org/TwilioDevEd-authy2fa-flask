@@ -46,7 +46,7 @@ class ViewsTestCase(unittest.TestCase):
         # Assert
         fake_client.users.create.assert_called()
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.location, "http://localhost/account")
+        self.assertEqual(resp.location, "/account")
 
         self.assertEqual(self.user.full_name, "test")
         self.assertEqual(self.user.country_code, 33)

@@ -27,7 +27,7 @@ class ViewsTestCase(unittest.TestCase):
 
         # Assert
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.location, "http://localhost/login")
+        self.assertEqual(resp.location, "/login")
 
     def test_account_as_logged_in(self):
         # Arrange
@@ -51,7 +51,7 @@ class ViewsTestCase(unittest.TestCase):
 
         # Assert
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.location, "http://localhost/login")
+        self.assertEqual(resp.location, "/login")
 
     def test_account_as_authentified(self):
         # Arrange
