@@ -8,11 +8,13 @@ class ViewsTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app("testing")
         self.client = self.app.test_client()
-        db.create_all()
+        with self.app.app_context():
+            db.create_all()
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        with self.app.app_context():
+            db.session.remove()
+            db.drop_all()
 
     def test_home(self):
         # Act
@@ -40,9 +42,10 @@ class ViewsTestCase(unittest.TestCase):
             123,
             authy_status="unverified",
         )
-        db.session.add(user)
-        db.session.commit()
-        db.session.refresh(user)
+        with self.app.app_context():
+            db.session.add(user)
+            db.session.commit()
+            db.session.refresh(user)
         with self.client.session_transaction() as sess:
             sess["user_id"] = user.id
 
@@ -64,9 +67,10 @@ class ViewsTestCase(unittest.TestCase):
             123,
             authy_status="approved",
         )
-        db.session.add(user)
-        db.session.commit()
-        db.session.refresh(user)
+        with self.app.app_context():
+            db.session.add(user)
+            db.session.commit()
+            db.session.refresh(user)
         with self.client.session_transaction() as sess:
             sess["user_id"] = user.id
 

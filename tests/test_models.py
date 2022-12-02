@@ -15,11 +15,13 @@ class UserTestCase(unittest.TestCase):
         self.user = User(
             "example@example.com", "fakepassword", "Alice", 33, 600112233, 123
         )
-        db.create_all()
+        with self.app.app_context():
+            db.create_all()
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        with self.app.app_context():
+            db.session.remove()
+            db.drop_all()
 
     def test_has_authy_app(self):
         # Arrange

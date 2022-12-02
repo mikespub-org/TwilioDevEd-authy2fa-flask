@@ -16,11 +16,13 @@ class ViewsTestCase(unittest.TestCase):
         self.user = User(
             "test@example.com", "fakepassword", "test", 33, "611223344", 1234
         )
-        db.create_all()
+        with self.app.app_context():
+            db.create_all()
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        with self.app.app_context():
+            db.session.remove()
+            db.drop_all()
 
     def test_sign_up(self):
         # Arrange
