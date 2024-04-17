@@ -15,7 +15,7 @@ requests>=2.31.0
 python-dotenv>=1.0.1
 
 # Production server
-gunicorn==21.2.0
+gunicorn==22.0.0
 
 # Testing
 coverage==7.4.3
